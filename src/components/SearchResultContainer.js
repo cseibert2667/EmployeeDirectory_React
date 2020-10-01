@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import SearchForm from "./SearchBar";
-import EmployeeCard from "./EmployeeCard";
+import EmployeeTable from "./EmployeeTable";
 import API from "../utils/API";
 
 class SearchResultContainer extends Component {
   state = {
     search: "",
     results: [],
-    filtered: []
+    filtered: [],
   };
 
   // When this component mounts, we send a request to the API to pull in 200 "employees" -- this means that when the page is refreshed, we will get 200 "new" employees (the api generates them at random)
@@ -18,17 +18,19 @@ class SearchResultContainer extends Component {
   getEmployees = () => {
     API.getUsers()
       .then((res) => {
-        this.setState({ results: res.data.results, filtered: res.data.results });
+        this.setState({
+          results: res.data.results,
+          filtered: res.data.results,
+        });
         console.log(this.state.results[0]);
       })
       .catch((err) => console.log(err));
   };
-  // searches the existing 200 employees that we pulled in above
+  // searches the existing 200 employees that we pulled in above by name and contact info
   searchEmployees = (query) => {
     const filteredEmployees = this.state.results.filter(
       (emp) =>
         emp.cell.includes(query) ||
-        emp.dob.date.includes(query) ||
         emp.email.includes(query) ||
         emp.name.first.includes(query) ||
         emp.name.last.includes(query) ||
@@ -36,7 +38,6 @@ class SearchResultContainer extends Component {
     );
     // sets this.state.results to the newly filtered array
     this.setState({ filtered: filteredEmployees });
-    console.log(this.state.filtered) // --- Why does this only update on the second click?
   };
 
   handleInputChange = (event) => {
@@ -62,7 +63,7 @@ class SearchResultContainer extends Component {
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        <EmployeeCard results={this.state.filtered} />
+        <EmployeeTable results={this.state.filtered} />
       </div>
     );
   }
