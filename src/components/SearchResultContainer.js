@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import SearchForm from "./SearchForm";
-import ResultList from "./ResultList";
+import SearchForm from "./SearchBar";
+import EmployeeCard from "./EmployeeCard";
 import API from "../utils/API";
 
 class SearchResultContainer extends Component {
@@ -9,17 +9,25 @@ class SearchResultContainer extends Component {
     results: []
   };
 
-  // When this component mounts, search the Giphy API for pictures of kittens
-  componentDidMount() {
-    this.searchEmployees();
+  // When this component mounts, we send a request to the API to pull in 200 "employees" -- this means that when the page is refreshed, we will get 200 "new" employees (the api generates them at random)
+  componentDidMount = () => {
+    this.getEmployees();
   }
-
-  searchEmployees = query => {
-    API.getUsers(query)
-      // logs first employee
-      .then(res => console.log(res.data.results[0]))
+  // api request sets our results array equal to the response
+  getEmployees = () => {
+    API.getUsers()
+      .then(res => {
+        this.setState({results: res.data.results});
+        console.log(this.state.results[0]);
+      })
       .catch(err => console.log(err));
   };
+  // searches the existing 200 employees that we pulled in above
+  searchEmployees = (query) => {
+    const filteredEmployees = this.state.results.filter(emp => emp.cell.includes(query) || emp.dob.date.includes(query) || emp.email.includes(query) || emp.name.first.includes(query) || emp.name.last.includes(query) || emp.phone.includes(query));
+      
+    console.log(filteredEmployees);
+  }
 
   handleInputChange = event => {
     const name = event.target.name;
@@ -32,7 +40,7 @@ class SearchResultContainer extends Component {
   // When the form is submitted, search the Giphy API for `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchGiphy(this.state.search);
+    this.searchEmployees(this.state.search);
   };
 
   render() {
@@ -43,7 +51,7 @@ class SearchResultContainer extends Component {
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        <ResultList results={this.state.results} />
+        <EmployeeCard results={this.state.results} />
       </div>
     );
   }
