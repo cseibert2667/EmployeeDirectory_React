@@ -6,39 +6,48 @@ import API from "../utils/API";
 class SearchResultContainer extends Component {
   state = {
     search: "",
-    results: []
+    results: [],
   };
 
   // When this component mounts, we send a request to the API to pull in 200 "employees" -- this means that when the page is refreshed, we will get 200 "new" employees (the api generates them at random)
   componentDidMount = () => {
     this.getEmployees();
-  }
+  };
   // api request sets our results array equal to the response
   getEmployees = () => {
     API.getUsers()
-      .then(res => {
-        this.setState({results: res.data.results});
+      .then((res) => {
+        this.setState({ results: res.data.results });
         console.log(this.state.results[0]);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
   // searches the existing 200 employees that we pulled in above
   searchEmployees = (query) => {
-    const filteredEmployees = this.state.results.filter(emp => emp.cell.includes(query) || emp.dob.date.includes(query) || emp.email.includes(query) || emp.name.first.includes(query) || emp.name.last.includes(query) || emp.phone.includes(query));
-      
-    console.log(filteredEmployees);
-  }
+    const filteredEmployees = this.state.results.filter(
+      (emp) =>
+        emp.cell.includes(query) ||
+        emp.dob.date.includes(query) ||
+        emp.email.includes(query) ||
+        emp.name.first.includes(query) ||
+        emp.name.last.includes(query) ||
+        emp.phone.includes(query)
+    );
+    // sets this.state.results to the newly filtered array
+    this.setState({ results: filteredEmployees });
+    // console.log(this.state.results) --- Why does this only update on the second click?
+  };
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
-  // When the form is submitted, search the Giphy API for `this.state.search`
-  handleFormSubmit = event => {
+  // When the form is submitted, search employees for `this.state.search`
+  handleFormSubmit = (event) => {
     event.preventDefault();
     this.searchEmployees(this.state.search);
   };
