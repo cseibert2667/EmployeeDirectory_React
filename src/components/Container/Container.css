@@ -1,0 +1,7 @@
+#name {
+    cursor: pointer;
+}
+
+#name:hover {
+    color: black
+}

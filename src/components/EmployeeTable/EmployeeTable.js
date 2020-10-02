@@ -12,7 +12,7 @@ function EmployeeTable(props) {
           <td scope="row">
             <img src={emp.picture.medium} id="empImg" />
           </td>
-          <td>
+          <td id="name">
             {emp.name.first} {emp.name.last}
           </td>
           <td>
