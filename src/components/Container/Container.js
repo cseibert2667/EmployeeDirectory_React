@@ -3,10 +3,10 @@ import SearchForm from "../SearchBar/SearchBar";
 import EmployeeTable from "../EmployeeTable/EmployeeTable";
 import API from "../../utils/API";
 
-class SearchResultContainer extends Component {
+class Container extends Component {
   state = {
     search: "",
-    results: []
+    results: [],
   };
 
   // When this component mounts, we send a request to the API to pull in 200 "employees" -- this means that when the page is refreshed, we will get 200 "new" employees (the api generates them at random)
@@ -49,17 +49,30 @@ class SearchResultContainer extends Component {
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        <EmployeeTable results={this.state.results.filter(
-      (emp) =>
-        emp.cell.includes(this.state.search) ||
-        emp.email.includes(this.state.search) ||
-        emp.name.first.includes(this.state.search) ||
-        emp.name.last.includes(this.state.search) ||
-        emp.phone.includes(this.state.search)
-    )} />
+        <table className="table table-striped table-dark text-center">
+          <thead>
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Name</th>
+              <th scope="col">Contact</th>
+              <th scope="col">DOB</th>
+              <th scope="col">Hire Date</th>
+            </tr>
+          </thead>
+          <EmployeeTable
+            results={this.state.results.filter(
+              (emp) =>
+                emp.cell.includes(this.state.search) ||
+                emp.email.includes(this.state.search) ||
+                emp.name.first.includes(this.state.search) ||
+                emp.name.last.includes(this.state.search) ||
+                emp.phone.includes(this.state.search)
+            )}
+          />
+        </table>
       </div>
     );
   }
 }
 
-export default SearchResultContainer;
+export default Container;
