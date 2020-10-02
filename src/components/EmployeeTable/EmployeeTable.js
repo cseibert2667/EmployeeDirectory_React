@@ -9,8 +9,8 @@ function EmployeeTable(props) {
     <tbody>
       {props.results.map((emp) => (
         <tr>
-          <td scope="row">
-            <img src={emp.picture.medium} id="empImg" />
+          <td>
+            <img src={emp.picture.medium} id="empImg" alt="empImg"/>
           </td>
           <td>
             {emp.name.first} {emp.name.last}
