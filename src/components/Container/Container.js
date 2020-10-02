@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import SearchForm from "../SearchBar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 import EmployeeTable from "../EmployeeTable/EmployeeTable";
+import Header from "../Header/Header";
 import API from "../../utils/API";
 import "./Container.css";
 
@@ -74,7 +75,8 @@ class Container extends Component {
   render() {
     return (
       <div>
-        <SearchForm
+        <Header />
+        <SearchBar
           search={this.state.search}
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
