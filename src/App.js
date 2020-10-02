@@ -1,5 +1,5 @@
 import React from "react";
-import SearchResultContainer from "./components/SearchResultContainer";
+import SearchResultContainer from "./components/SearchResultContainer/SearchResultContainer";
 
 function App() {
   return <SearchResultContainer />;

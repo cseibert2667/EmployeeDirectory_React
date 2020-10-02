@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import SearchForm from "./SearchBar";
-import EmployeeTable from "./EmployeeTable";
-import API from "../utils/API";
+import SearchForm from "../SearchBar/SearchBar";
+import EmployeeTable from "../EmployeeTable/EmployeeTable";
+import API from "../../utils/API";
 
 class SearchResultContainer extends Component {
   state = {
     search: "",
-    results: [],
-    filtered: [],
+    results: []
   };
 
   // When this component mounts, we send a request to the API to pull in 200 "employees" -- this means that when the page is refreshed, we will get 200 "new" employees (the api generates them at random)
@@ -25,19 +24,6 @@ class SearchResultContainer extends Component {
         console.log(this.state.results[0]);
       })
       .catch((err) => console.log(err));
-  };
-  // searches the existing 200 employees that we pulled in above by name and contact info
-  searchEmployees = (query) => {
-    const filteredEmployees = this.state.results.filter(
-      (emp) =>
-        emp.cell.includes(query) ||
-        emp.email.includes(query) ||
-        emp.name.first.includes(query) ||
-        emp.name.last.includes(query) ||
-        emp.phone.includes(query)
-    );
-    // sets this.state.results to the newly filtered array
-    this.setState({ filtered: filteredEmployees });
   };
 
   handleInputChange = (event) => {
@@ -63,7 +49,14 @@ class SearchResultContainer extends Component {
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        <EmployeeTable results={this.state.filtered} />
+        <EmployeeTable results={this.state.results.filter(
+      (emp) =>
+        emp.cell.includes(this.state.search) ||
+        emp.email.includes(this.state.search) ||
+        emp.name.first.includes(this.state.search) ||
+        emp.name.last.includes(this.state.search) ||
+        emp.phone.includes(this.state.search)
+    )} />
       </div>
     );
   }

@@ -1,11 +1,10 @@
 import React from "react";
 import Moment from "react-moment";
+import "./EmployeeTable.css"
 
 function EmployeeTable(props) {
   // bootstrap table for each employee: image, name, cell, email
   return (
-    
-    
     <table className="table table-striped table-dark text-center">
   <thead>
     <tr>
@@ -19,7 +18,7 @@ function EmployeeTable(props) {
   <tbody>
       {props.results.map(emp => (
     <tr>
-      <td scope="row"><img src={emp.picture.medium} /></td>
+      <td scope="row"><img src={emp.picture.medium} id="empImg"/></td>
       <td>{emp.name.first} {emp.name.last}</td>
       <td>
         <b>Home:</b> {emp.phone} <br/>
