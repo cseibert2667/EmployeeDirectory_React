@@ -51,8 +51,8 @@ class Container extends Component {
     if (this.state.alphabetical) {
       this.setState({ sortedIcon: "▲"})
       sorted = this.state.results.sort((a, b) => {
-        let nameA = a.name.first.toLowerCase(),
-          nameB = b.name.first.toLowerCase();
+        let nameA = a.name.first.toLowerCase();
+        let nameB = b.name.first.toLowerCase();
         if (nameA < nameB) return -1;
         if (nameA > nameB) return 1;
         return 0;
@@ -60,8 +60,8 @@ class Container extends Component {
     } else {
       this.setState({ sortedIcon: "▼"})
       sorted = this.state.results.sort((a, b) => {
-        let nameA = a.name.first.toLowerCase(),
-          nameB = b.name.first.toLowerCase();
+        let nameA = a.name.first.toLowerCase();
+        let nameB = b.name.first.toLowerCase();
         if (nameA > nameB) return -1;
         if (nameA < nameB) return 1;
         return 0;
