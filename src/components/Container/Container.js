@@ -45,6 +45,7 @@ class Container extends Component {
     this.searchEmployees(this.state.search);
   };
 
+  // sorts alphabetically by first name, in ascending or descending order dependent on the current value of "alphabetical" in our state
   sortByName = () => {
     let sorted = [];
     if (this.state.alphabetical) {
