@@ -19,6 +19,10 @@ A single-page application built using React that simulates an Employee Directory
 Use the search bar to filter by name, email, or phone number. Click on the "Name" column header to sort employees alphabetically in either ascending or descending order.
 
 ## Examples:
+[Deployed Site](https://hardcore-meninsky-5a15cc.netlify.app/) (via Netlify)
+
+Preview:
+
 <img src="./assets/preview.png" alt="preview" width="600px">
 
 ## Contributing
