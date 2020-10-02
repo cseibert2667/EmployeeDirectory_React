@@ -8,7 +8,7 @@ export default function Header() {
                 <h1>Employee Directory</h1>
             </div>
             <div className="info">
-                <h3>To filter, simply begin typing or click on the "Name" heading to sort alphabetically in ascending or descending order.</h3>
+                <h5>To filter, simply begin typing, or click on the "Name" heading to sort alphabetically in ascending or descending order.</h5>
             </div>
         </div>
     )

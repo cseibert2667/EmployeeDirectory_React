@@ -11,7 +11,7 @@ function SearchBar(props) {
           name="search"
           type="text"
           className="form-control"
-          placeholder="Search by Name, Phone #, or Email"
+          placeholder="Filter by Name, Phone #, or Email"
           id="search"
         />
       </div>
